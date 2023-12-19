@@ -1,9 +1,10 @@
 import express from "express";
-import { env } from "./configs/env";
+import { routes } from "./routes/route";
 
 const app = express();
 
 // Middlewares:
 app.use(express.json());
+app.use(routes);
 
 export { app };
