@@ -1,7 +1,14 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-const PhotoSchema = new mongoose.Schema({
-   url: { type: String, required: true },
-});
+export interface Photo extends Document {
+   fileName: string;
+   mimeType: string;
+}
 
-export const PhotoModel = mongoose.model("Photo", PhotoSchema);
+export const PhotoModel = mongoose.model<Photo>(
+   "Photo",
+   new Schema<Photo>({
+      fileName: { type: String, required: true },
+      mimeType: { type: String, required: true },
+   })
+);
