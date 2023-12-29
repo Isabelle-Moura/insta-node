@@ -6,9 +6,8 @@ export const checkAuthorization = (req: Request, res: Response, next: NextFuncti
       if (!token) {
          return res.status(401).json({ message: "Token wasn't given." });
       }
-      res.status(200).json({ message: "Photo updated!" });
+      next();
    } catch (error: any) {
       res.status(403).json({ message: "You didn't receive the permission to this." });
    }
-   next();
 };

@@ -1,7 +1,7 @@
 import { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
 import { env } from "../configs/env";
-import { UserRepository } from "../modules/user/repository/user.repository";
+import { UserRepository } from "../modules/user/user.repository";
 import { LoginDTO } from "./auth.dto";
 
 export class AuthService {

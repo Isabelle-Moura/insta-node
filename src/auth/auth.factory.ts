@@ -1,5 +1,5 @@
-import { UserModel } from "../modules/user/model/user.model";
-import { UserRepository } from "../modules/user/repository/user.repository";
+import { UserModel } from "../modules/user/user.model";
+import { UserRepository } from "../modules/user/user.repository";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.services";
 
