@@ -1,12 +1,16 @@
 import { Request, Response } from "express";
-import { likePost } from "./like.service";
+import { LikeService } from "./like.services";
 
-export const likePostController = async (req: Request, res: Response) => {
-   try {
-      const userId = req.user._id; // assuming you have middleware for user authentication
-      const like = await likePost(userId);
-      res.json(like);
-   } catch (error) {
-      res.status(500).json({ message: "Error liking post" });
+export class LikeController {
+   constructor(private service: LikeService) {}
+
+   async likePostController(req: Request, res: Response) {
+      try {
+         const userId = req.body.user._id;
+         const like = await this.service.likePost(userId);
+         res.status(200).json({ message: "Your post received a like!", like });
+      } catch (error) {
+         res.status(500).json({ message: "Error liking post" });
+      }
    }
-};
+}

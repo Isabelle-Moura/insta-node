@@ -1,6 +1,11 @@
-import { Like, createLike } from "./like.repository";
+import { Like } from "./like.model";
+import { LikeRepository } from "./like.repository";
 
-export const likePost = async (userId: string): Promise<Like> => {
-   const like = await createLike(userId);
-   return like;
-};
+export class LikeService {
+   constructor(private repository: LikeRepository) {}
+
+   async likePost(userId: string): Promise<Like> {
+      const like = await this.repository.createLike(userId);
+      return like;
+   }
+}

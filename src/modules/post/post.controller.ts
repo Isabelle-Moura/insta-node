@@ -20,7 +20,7 @@ export class PostController {
       try {
          const postId = req.params.postId;
          await this.service.erasePost(postId);
-         res.json({ message: "Post deleted successfully" });
+         res.status(200).json({ message: "Post deleted successfully" });
       } catch (error) {
          res.status(500).json({ message: "Error deleting post" });
       }
@@ -36,7 +36,7 @@ export class PostController {
             return;
          }
 
-         res.json(post);
+         res.status(200).json(post);
       } catch (error) {
          res.status(500).json({ message: "Error fetching post" });
       }

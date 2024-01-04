@@ -1,10 +1,13 @@
-import { LikeModel, Like } from "./like.model";
+import { Like } from "./like.model";
+import { Model } from "mongoose";
 
-export const createLike = async (userId: string): Promise<Like> => {
-   const like = new LikeModel({
-      user: userId,
-   });
+export class LikeRepository {
+   constructor(private model: Model<Like>) {}
 
-   await like.save();
-   return like;
-};
+   async createLike(userId: string): Promise<Like> {
+      const like = await this.model.create({
+         user: userId,
+      });
+      return like;
+   }
+}

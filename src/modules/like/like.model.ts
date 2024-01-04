@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface Like extends Document {
-   user: mongoose.Types.ObjectId;
+   user: Schema.Types.ObjectId;
 }
 
 const likeSchema = new Schema<Like>({
