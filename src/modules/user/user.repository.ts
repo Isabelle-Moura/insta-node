@@ -1,6 +1,6 @@
 import { CreateUserDto, UpdateUserDto } from "./user.dto";
 import { Model } from "mongoose";
-import { UserModel, User } from "./user.model";
+import { User } from "./user.model";
 
 export class UserRepository {
    constructor(private model: Model<User>) {}

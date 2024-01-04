@@ -6,12 +6,13 @@ export interface Post extends Document {
    likes: mongoose.Types.ObjectId[];
    comments: mongoose.Types.ObjectId[];
 }
+
 const postSchema = new Schema<Post>(
    {
       content: { type: String, required: true },
-      user: { type: mongoose.Types.ObjectId, ref: "User", required: true },
-      likes: [{ type: mongoose.Types.ObjectId, ref: "Like" }],
-      comments: [{ type: mongoose.Types.ObjectId, ref: "Comment" }],
+      user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+      likes: [{ type: Schema.Types.ObjectId, ref: "Like" }],
+      comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
    },
    { timestamps: true }
 );

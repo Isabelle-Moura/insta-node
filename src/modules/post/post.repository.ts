@@ -1,22 +1,24 @@
-import { PostModel, Post } from "./post.model";
+import { Post } from "./post.model";
+import { Model } from "mongoose";
 
-export const createPost = async (content: string, userId: string): Promise<Post> => {
-   const post = new PostModel({
-      content,
-      user: userId,
-      likes: [],
-      comments: [],
-   });
+export class PostRepository {
+   constructor(private model: Model<Post>) {}
+   async createPost(content: string, userId: string): Promise<Post> {
+      const post = this.model.create({
+         content,
+         user: userId,
+         likes: [],
+         comments: [],
+      });
+      return post;
+   }
 
-   await post.save();
-   return post;
-};
+   async deletePost(postId: string): Promise<void> {
+      await this.model.findByIdAndDelete(postId);
+   }
 
-export const deletePost = async (postId: string): Promise<void> => {
-   await PostModel.findByIdAndDelete(postId);
-};
-
-export const findPostById = async (postId: string): Promise<Post | null> => {
-   const post = await PostModel.findById(postId);
-   return post;
-};
+   async findPostById(postId: string): Promise<Post | null> {
+      const post = await this.model.findById(postId);
+      return post;
+   }
+}

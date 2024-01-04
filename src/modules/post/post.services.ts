@@ -1,16 +1,20 @@
-import { createPost, deletePost, findPostById } from "./post.repository";
+import { PostRepository } from "./post.repository";
 import { Post } from "./post.model";
 
-export const makePost = async (content: string, userId: string): Promise<Post> => {
-   const post = await createPost(content, userId);
-   return post;
-};
+export class PostService {
+   constructor(private repository: PostRepository) {}
 
-export const erasePost = async (postId: string): Promise<void> => {
-   await deletePost(postId);
-};
+   async makePost(content: string, userId: string): Promise<Post> {
+      const post = await this.repository.createPost(content, userId);
+      return post;
+   }
 
-export const getPostById = async (postId: string): Promise<Post | null> => {
-   const post = await findPostById(postId);
-   return post;
-};
+   async erasePost(postId: string): Promise<void> {
+      await this.repository.deletePost(postId);
+   }
+
+   async getPostById(postId: string): Promise<Post | null> {
+      const post = await this.repository.findPostById(postId);
+      return post;
+   }
+}

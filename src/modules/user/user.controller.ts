@@ -18,7 +18,7 @@ export class UserController {
    async updateUserPhoto(req: Request, res: Response) {
       try {
          const userId = req.params.userId;
-         const photoId = req.body.photoId; // assumindo que você envie o ID da foto no corpo da requisição
+         const photoId = req.body.photoId;
 
          const updatedUser = await this.service.updateUserPhoto(userId, photoId);
 

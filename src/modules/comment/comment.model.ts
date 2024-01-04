@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from "mongoose";
 
 export interface Content extends Document {
    text: string;
-   user: mongoose.Types.ObjectId | null;
+   user: Schema.Types.ObjectId | null;
 }
 
 export const ContentModel = mongoose.model<Content>(
