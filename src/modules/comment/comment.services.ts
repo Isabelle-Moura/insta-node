@@ -1,18 +1,22 @@
-import { Content, ContentModel } from "./content.model";
-import { CreateContentDTO, UpdateContentDTO } from "./content.dto";
-import { createContent, getContentById, updateContent } from "./content.repository";
+import { Comment, CommentModel } from "./comment.model";
+import { CreateCommentDTO, UpdateCommentDTO } from "./comment.dto";
+import { CommentRepository } from "./comment.repository";
 
-export const createContentService = async (content: CreateContentDTO): Promise<Content> => {
-   const newContent = await createContent(content);
-   return newContent;
-};
+export class CommentService {
+   constructor(private repository: CommentRepository) {}
 
-export const updateContentService = async (contentId: string, updatedContent: UpdateContentDTO): Promise<Content | null> => {
-   const content = await updateContent(contentId, updatedContent);
-   return content;
-};
+   async createCommentService(comment: CreateCommentDTO): Promise<Comment> {
+      const newComment = await this.repository.createComment(comment);
+      return newComment;
+   }
 
-export const getContentService = async (contentId: string): Promise<Content | null> => {
-   const content = await getContentById(contentId);
-   return content;
-};
+   async updateCommentService(commentId: string, updatedComment: UpdateCommentDTO): Promise<Comment | null> {
+      const comment = await this.repository.updateComment(commentId, updatedComment);
+      return comment;
+   }
+
+   async getCommentService(commentId: string): Promise<Comment | null> {
+      const comment = await this.repository.getCommentById(commentId);
+      return comment;
+   }
+}

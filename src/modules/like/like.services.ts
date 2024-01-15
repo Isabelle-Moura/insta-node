@@ -4,8 +4,8 @@ import { LikeRepository } from "./like.repository";
 export class LikeService {
    constructor(private repository: LikeRepository) {}
 
-   async likePost(userId: string): Promise<Like> {
-      const like = await this.repository.createLike(userId);
+   async likePost(postId: string): Promise<Like> {
+      const like = await this.repository.createLike(postId);
       return like;
    }
 }

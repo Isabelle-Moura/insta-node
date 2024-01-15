@@ -6,8 +6,8 @@ export class LikeController {
 
    async likePostController(req: Request, res: Response) {
       try {
-         const userId = req.body.user._id;
-         const like = await this.service.likePost(userId);
+         const { postId } = req.params;
+         const like = await this.service.likePost(postId);
          res.status(200).json({ message: "Your post received a like!", like });
       } catch (error) {
          res.status(500).json({ message: "Error liking post" });

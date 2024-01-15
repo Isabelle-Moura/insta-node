@@ -7,7 +7,7 @@ export class PostController {
    async makePostController(req: Request, res: Response) {
       try {
          const { content } = req.body;
-         const userId = req.body.user._id;
+         const userId = req.body.user;
 
          const post = await this.service.makePost(content, userId);
          res.status(201).json(post);

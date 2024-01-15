@@ -1,23 +1,27 @@
-import { ContentModel, Content } from "./content.model";
+import { CreateCommentDTO, UpdateCommentDTO } from "./comment.dto";
+import { CommentModel, Comment } from "./comment.model";
+import { Model } from "mongoose";
 
-export const createContent = async (content: CreateContentDTO): Promise<Content> => {
-   const newContent = new ContentModel(content);
-   await newContent.save();
-   return newContent;
-};
+export class CommentRepository {
+   constructor(private model: Model<Comment>) {}
+   async createComment(comment: CreateCommentDTO): Promise<Comment> {
+      const newComment = this.model.create(comment);
+      return newComment;
+   }
 
-export const updateContent = async (contentId: string, updatedContent: UpdateContentDTO): Promise<Content | null> => {
-   const content = await ContentModel.findByIdAndUpdate(
-      contentId,
-      {
-         ...updatedContent,
-      },
-      { new: true }
-   );
-   return content;
-};
+   async updateComment(CommentId: string, updatedComment: UpdateCommentDTO): Promise<Comment | null> {
+      const Comment = await this.model.findByIdAndUpdate(
+         CommentId,
+         {
+            ...updatedComment,
+         },
+         { new: true }
+      );
+      return Comment;
+   }
 
-export const getContentById = async (contentId: string): Promise<Content | null> => {
-   const content = await ContentModel.findById(contentId);
-   return content;
-};
+   async getCommentById(CommentId: string): Promise<Comment | null> {
+      const Comment = await this.model.findById(CommentId);
+      return Comment;
+   }
+}

@@ -1,8 +1,8 @@
-export interface CreateContentDTO {
+export interface CreateCommentDTO {
    text: string;
    userId: string;
 }
 
-export interface UpdateContentDTO {
+export interface UpdateCommentDTO {
    text: string;
 }

@@ -1,8 +1,8 @@
 import express from "express";
-import { createContentController, getContentController, updateContentController } from "./content.controller";
+import { commentFactory } from "./comment.factory";
 
-export const contentRouter = express.Router();
+export const commentRouter = express.Router();
 
-contentRouter.post("/create", createContentController);
-contentRouter.patch("/:contentId/update", updateContentController);
-contentRouter.get("/:contentId", getContentController);
+commentRouter.post("/create", commentFactory.createCommentController.bind(commentFactory));
+commentRouter.patch("/:commentId/update", commentFactory.updateCommentController.bind(commentFactory));
+commentRouter.get("/:commentId", commentFactory.getCommentController.bind(commentFactory));
