@@ -5,13 +5,17 @@ export class PostRepository {
    constructor(private model: Model<Post>) {}
    async createPost(content: string, userId: string): Promise<Post> {
       const post = await (
-         await this.model.create({
-            content,
-            user: userId,
-            likes: [],
-            comments: [],
-         })
-      ).populate("user");
+         await (
+            await (
+               await this.model.create({
+                  content,
+                  user: userId,
+                  likes: [],
+                  comments: [],
+               })
+            ).populate("user")
+         ).populate("likes")
+      ).populate("comments");
       return post;
    }
 
