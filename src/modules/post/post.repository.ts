@@ -4,12 +4,14 @@ import { Model } from "mongoose";
 export class PostRepository {
    constructor(private model: Model<Post>) {}
    async createPost(content: string, userId: string): Promise<Post> {
-      const post = this.model.create({
-         content,
-         user: userId,
-         likes: [],
-         comments: [],
-      });
+      const post = await (
+         await this.model.create({
+            content,
+            user: userId,
+            likes: [],
+            comments: [],
+         })
+      ).populate("user");
       return post;
    }
 

@@ -5,19 +5,19 @@ import { Model } from "mongoose";
 export class CommentRepository {
    constructor(private model: Model<Comment>) {}
    async createComment(comment: CreateCommentDTO): Promise<Comment> {
-      const newComment = this.model.create(comment);
+      const newComment = (await this.model.create(comment)).populate("post");
       return newComment;
    }
 
-   async updateComment(CommentId: string, updatedComment: UpdateCommentDTO): Promise<Comment | null> {
-      const Comment = await this.model.findByIdAndUpdate(
-         CommentId,
+   async updateComment(commentId: string, updatedComment: UpdateCommentDTO): Promise<Comment | null> {
+      const comment = await this.model.findByIdAndUpdate(
+         commentId,
          {
             ...updatedComment,
          },
          { new: true }
       );
-      return Comment;
+      return comment;
    }
 
    async getCommentById(CommentId: string): Promise<Comment | null> {
